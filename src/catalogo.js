@@ -64,7 +64,7 @@ function mostrarError(error) {
 }
 
 function llenarCategorias() {
-  const categorias = [...new Set(comidas.map((c) => c.strCategory))].sort();
+  const categorias = [...new Set(comidas.map((c) => c.strCategory).filter(Boolean))].sort();
   for (const categoria of categorias) {
     const opcion = document.createElement("option");
     opcion.value = categoria;
@@ -89,7 +89,7 @@ function crearTarjeta(comida) {
   titulo.textContent = comida.strMeal;
 
   const dato = document.createElement("p");
-  dato.textContent = `${comida.strCategory} · ${comida.strArea}`;
+  dato.textContent = [comida.strCategory, comida.strArea].filter(Boolean).join(" · ");
 
   cuerpo.append(titulo, dato);
   tarjeta.append(img, cuerpo);
