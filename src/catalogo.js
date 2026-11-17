@@ -9,6 +9,13 @@ const contador = document.querySelector("#contador");
 const inputBusqueda = document.querySelector("#busqueda");
 const selectCategoria = document.querySelector("#categoria");
 const selectOrden = document.querySelector("#orden");
+const dialogo = document.querySelector("#receta");
+const imgReceta = document.querySelector("#receta-img");
+const tituloReceta = document.querySelector("#receta-titulo");
+const datoReceta = document.querySelector("#receta-dato");
+const listaIngredientes = document.querySelector("#receta-ingredientes");
+const pasosReceta = document.querySelector("#receta-pasos");
+const videoReceta = document.querySelector("#receta-video");
 
 let comidas = [];
 
@@ -20,6 +27,61 @@ async function pedirLetra(letra) {
   const datos = await response.json();
   return datos.meals ?? [];
 }
+
+function abrirReceta(comida) {
+  imgReceta.src = `${comida.strMealThumb}/large`;
+  imgReceta.alt = `Plato: ${comida.strMeal}`;
+  tituloReceta.textContent = comida.strMeal;
+  datoReceta.textContent = [comida.strCategory, comida.strArea].filter(Boolean).join(" · ");
+
+  // Ingredientes: la API los manda en campos sueltos (strIngredient1 a 20)
+  const items = [];
+  for (let i = 1; i <= 20; i++) {
+    const ingrediente = comida[`strIngredient${i}`];
+    if (!ingrediente || !ingrediente.trim()) continue;
+    const medida = comida[`strMeasure${i}`];
+    const li = document.createElement("li");
+    li.textContent = [medida?.trim(), ingrediente.trim()].filter(Boolean).join(" ");
+    items.push(li);
+  }
+  listaIngredientes.replaceChildren(...items);
+
+  // Instrucciones: un párrafo por línea
+  const parrafos = (comida.strInstructions ?? "")
+    .split(/\r?\n/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((t) => {
+      const p = document.createElement("p");
+      p.textContent = t;
+      return p;
+    });
+  if (parrafos.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "Esta receta no tiene instrucciones cargadas.";
+    parrafos.push(p);
+  }
+  pasosReceta.replaceChildren(...parrafos);
+
+  // Video (si existe)
+  videoReceta.replaceChildren();
+  if (comida.strYoutube) {
+    const enlace = document.createElement("a");
+    enlace.href = comida.strYoutube;
+    enlace.target = "_blank";
+    enlace.rel = "noopener";
+    enlace.textContent = "Ver video de la receta";
+    videoReceta.append(enlace);
+  }
+
+  dialogo.showModal();
+  dialogo.firstElementChild.scrollTop = 0;
+}
+
+document.querySelector("#receta-cerrar").addEventListener("click", () => dialogo.close());
+dialogo.addEventListener("click", (e) => {
+  if (e.target === dialogo) dialogo.close(); // clic en el fondo oscuro
+});
 
 async function cargarComidas() {
   mostrarCargando();
@@ -86,7 +148,11 @@ function crearTarjeta(comida) {
   cuerpo.className = "tarjeta-cuerpo";
 
   const titulo = document.createElement("h2");
-  titulo.textContent = comida.strMeal;
+  const botonAbrir = document.createElement("button");
+  botonAbrir.type = "button";
+  botonAbrir.textContent = comida.strMeal;
+  botonAbrir.addEventListener("click", () => abrirReceta(comida));
+  titulo.append(botonAbrir);
 
   const dato = document.createElement("p");
   dato.textContent = [comida.strCategory, comida.strArea].filter(Boolean).join(" · ");

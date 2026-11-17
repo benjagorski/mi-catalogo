@@ -45,6 +45,22 @@
       <p>Mesa Abierta · Programación III, TP N.º 2 · 2026 · Datos de <a href="https://www.themealdb.com" target="_blank" rel="noopener">TheMealDB</a></p>
     </footer>
 
+    <dialog id="receta" class="receta" aria-labelledby="receta-titulo">
+  <article>
+    <button type="button" id="receta-cerrar" class="receta-cerrar" aria-label="Cerrar receta">✕</button>
+    <img id="receta-img" src="" alt="" />
+    <div class="receta-cuerpo">
+      <h2 id="receta-titulo"></h2>
+      <p id="receta-dato"></p>
+      <h3>Ingredientes</h3>
+      <ul id="receta-ingredientes"></ul>
+      <h3>Preparación</h3>
+      <div id="receta-pasos"></div>
+      <p id="receta-video"></p>
+    </div>
+  </article>
+</dialog>
+
     <script type="module" src="/src/catalogo.js"></script>
   </body>
 </html>

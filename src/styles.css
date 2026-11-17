@@ -147,6 +147,58 @@ nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--color-acento); }
 .site-footer p { margin: 0; }
 .site-footer a { color: var(--color-acento); }
 
+/* Tarjeta clickeable: el botón del título cubre toda la tarjeta */
+.tarjeta { position: relative; cursor: pointer; }
+.tarjeta h2 button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+.tarjeta h2 button::after { content: ""; position: absolute; inset: 0; }
+.tarjeta h2 button:focus-visible { outline: none; }
+.tarjeta:has(button:focus-visible) { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+
+/* Modal de receta */
+.receta {
+  width: min(92vw, 640px);
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+}
+.receta::backdrop { background: rgba(34, 24, 30, 0.7); }
+.receta article { max-height: 90vh; overflow-y: auto; }
+.receta img { display: block; width: 100%; max-height: 280px; object-fit: cover; }
+.receta-cuerpo { padding: 1.25rem 1.5rem 1.75rem; }
+.receta-cuerpo h2 { margin: 0 0 0.25rem; color: var(--color-principal); }
+.receta-cuerpo h3 { margin: 1.25rem 0 0.5rem; }
+.receta-cuerpo ul { margin: 0; padding-left: 1.2rem; }
+.receta-cuerpo p { margin: 0 0 0.75rem; }
+.receta-cerrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-acento);
+  color: var(--color-texto);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.receta-cerrar:hover { transform: scale(1.1); }
+body:has(dialog[open]) { overflow: hidden; }
+
 /* Pantallas grandes (mobile-first) */
 @media (min-width: 720px) {
   .hero { flex-direction: row; justify-content: center; gap: 4rem; padding: 4rem 2rem; }
