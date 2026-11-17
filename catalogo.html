@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo — Mesa Abierta</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="./index.html">Mesa Abierta</a>
+      <nav aria-label="Principal">
+        <a href="./index.html">Inicio</a>
+        <a href="./catalogo.html" aria-current="page">Catálogo</a>
+      </nav>
+    </header>
+
+    <main class="contenedor">
+      <h1>Catálogo de recetas</h1>
+
+      <section class="controles" aria-label="Búsqueda y filtros">
+        <div class="campo">
+          <label for="busqueda">Buscar por nombre</label>
+          <input type="search" id="busqueda" placeholder="Ej.: pasta, pollo" />
+        </div>
+        <div class="campo">
+          <label for="categoria">Categoría</label>
+          <select id="categoria"><option value="">Todas</option></select>
+        </div>
+        <div class="campo">
+          <label for="orden">Ordenar</label>
+          <select id="orden">
+            <option value="asc">Nombre (A–Z)</option>
+            <option value="desc">Nombre (Z–A)</option>
+          </select>
+        </div>
+      </section>
+
+      <p id="contador" class="contador" aria-live="polite"></p>
+      <p id="estado" class="estado" role="status"></p>
+      <section id="grilla" class="grilla" aria-label="Recetas"></section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Mesa Abierta · Programación III, TP N.º 2 · 2026 · Datos de <a href="https://www.themealdb.com" target="_blank" rel="noopener">TheMealDB</a></p>
+    </footer>
+
+    <script type="module" src="/src/catalogo.js"></script>
+  </body>
+</html>
