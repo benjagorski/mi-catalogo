@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesa Abierta — Recetas del mundo</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="./index.html">Mesa Abierta</a>
+      <nav aria-label="Principal">
+        <a href="./index.html" aria-current="page">Inicio</a>
+        <a href="./catalogo.html">Catálogo</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-texto">
+          <h1>Cocinás hoy. Elegís entre cientos de recetas.</h1>
+          <p>Platos de más de veinte países, listos para mirar, filtrar y copiar.</p>
+          <a class="boton" href="./catalogo.html">Ver las recetas</a>
+        </div>
+        <figure class="plato" role="img" aria-label="Ilustración de un plato servido">
+          <span class="plato-centro"></span>
+        </figure>
+      </section>
+
+      <section class="tema">
+        <h2>Una cocina, muchas mesas</h2>
+        <p>
+          El catálogo reúne recetas de distintas regiones y categorías: entradas,
+          platos principales, postres y más. Cada tarjeta muestra la foto del plato,
+          su nombre y el país de origen. Los datos se cargan en vivo desde TheMealDB,
+          una base de recetas abierta y gratuita.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Mesa Abierta · Programación III, TP N.º 2 · 2026 · Datos de <a href="https://www.themealdb.com" target="_blank" rel="noopener">TheMealDB</a></p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
